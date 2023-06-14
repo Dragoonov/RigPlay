@@ -2,6 +2,7 @@ rootProject.name = "MyApplication"
 
 include(":androidApp")
 include(":shared")
+include(":shared:presentation")
 
 pluginManagement {
     repositories {
@@ -25,7 +26,6 @@ pluginManagement {
         id("org.jetbrains.compose").version(composeVersion)
     }
 }
-
 dependencyResolutionManagement {
     repositories {
         google()
