@@ -1,4 +1,4 @@
-rootProject.name = "MyApplication"
+rootProject.name = "RigPlay"
 
 include(":androidApp")
 include(":shared")

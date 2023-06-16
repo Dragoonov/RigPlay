@@ -1,4 +1,4 @@
-package com.myapplication
+package com.moonlightbutterfly.rigplay
 
 import MainView
 import android.os.Bundle
