@@ -30,6 +30,8 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
+                implementation(project(":shared:data"))
+                implementation(project(":shared:domain"))
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)

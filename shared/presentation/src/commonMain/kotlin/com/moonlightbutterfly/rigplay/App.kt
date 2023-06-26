@@ -1,6 +1,6 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import home.HomeLayout
+import com.moonlightbutterfly.rigplay.home.HomeLayout
 @Composable
 fun App() {
     MaterialTheme {

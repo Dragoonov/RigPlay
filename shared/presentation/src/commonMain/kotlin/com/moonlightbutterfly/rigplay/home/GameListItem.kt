@@ -1,4 +1,4 @@
-package home
+package com.moonlightbutterfly.rigplay.home
 
 data class GameListItem(
     val title: String,

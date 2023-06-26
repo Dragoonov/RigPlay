@@ -1,8 +1,9 @@
 rootProject.name = "RigPlay"
 
 include(":androidApp")
-include(":shared")
 include(":shared:presentation")
+include(":shared:data")
+include(":shared:domain")
 
 pluginManagement {
     repositories {
