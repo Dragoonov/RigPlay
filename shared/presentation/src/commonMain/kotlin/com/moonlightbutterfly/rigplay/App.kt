@@ -7,5 +7,3 @@ fun App() {
         HomeLayout()
     }
 }
-
-expect fun getPlatformName(): String
