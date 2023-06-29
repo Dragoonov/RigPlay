@@ -3,9 +3,22 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
+    id("kotlin-parcelize")
 }
 
 kotlin {
+
+    targets
+        .filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>()
+        .filter { it.konanTarget.family == org.jetbrains.kotlin.konan.target.Family.IOS }
+        .forEach { target ->
+            target.binaries {
+                framework {
+                    export("com.arkivanov.decompose:decompose:2.1.0-alpha-02")
+                }
+            }
+        }
+
     android()
 
     iosX64()
@@ -37,10 +50,11 @@ kotlin {
                 implementation(compose.material)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-
                 implementation("media.kamel:kamel-image:0.5.1")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+                implementation("com.arkivanov.mvikotlin:mvikotlin:3.2.1")
+                implementation("com.arkivanov.decompose:decompose:2.1.0-alpha-02")
             }
         }
         val androidMain by getting {
@@ -50,6 +64,7 @@ kotlin {
                 api("androidx.core:core-ktx:1.9.0")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:2.1.0-alpha-02")
             }
         }
         val iosX64Main by getting
