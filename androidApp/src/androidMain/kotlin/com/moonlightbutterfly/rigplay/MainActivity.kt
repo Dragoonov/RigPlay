@@ -1,16 +1,20 @@
 package com.moonlightbutterfly.rigplay
 
-import MainView
 import android.os.Bundle
-import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
+import com.moonlightbutterfly.rigplay.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
-            MainView()
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        supportFragmentManager.commit {
+            replace(binding.navHostFragment.id, GameListFragment())
+            setReorderingAllowed(true)
+            addToBackStack(null)
         }
+        setContentView(binding.root)
     }
 }

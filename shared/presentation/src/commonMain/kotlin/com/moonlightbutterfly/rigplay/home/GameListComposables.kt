@@ -8,30 +8,36 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.moonlightbutterfly.rigplay.model.Game
-import com.moonlightbutterfly.rigplay.data.repository.GamesDataSourceImpl
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeLayout() {
-    MainList()
+fun MainLayout(
+    onRefreshClicked: () -> Unit,
+    games: List<GameListItem>,
+    isLoading: Boolean
+) {
+    MainList(onRefreshClicked, games, isLoading)
 }
 
 @Composable
-fun MainList() {
-
-    val repository = GamesDataSourceImpl()
-    val scope = rememberCoroutineScope()
-    val (list, setList) = remember { mutableStateOf<List<Game>>(emptyList()) }
-
-    scope.launch {
-        setList(repository.getGames())
-    }
-    LazyColumn {
-        items(list) {
-            ListItem(GameListItem(it.title, it.imageUrl))
+fun MainList(
+    onRefreshClicked: () -> Unit,
+    games: List<GameListItem>,
+    isLoading: Boolean
+) {
+    Box {
+        LazyColumn {
+            items(games) {
+                ListItem(GameListItem(it.title, it.imageUrl))
+            }
+        }
+        Button(onClick = onRefreshClicked, modifier = Modifier.padding(start = 50.dp)) {
+            Text("Refresh")
+        }
+        if (isLoading) {
+            CircularProgressIndicator()
         }
     }
 }

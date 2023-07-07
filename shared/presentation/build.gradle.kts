@@ -54,7 +54,9 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
                 implementation("com.arkivanov.mvikotlin:mvikotlin:3.2.1")
-                implementation("com.arkivanov.decompose:decompose:2.1.0-alpha-02")
+                implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.2.1")
+                implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.2.1")
+                implementation("com.arkivanov.essenty:lifecycle:1.1.0")
             }
         }
         val androidMain by getting {
@@ -64,7 +66,6 @@ kotlin {
                 api("androidx.core:core-ktx:1.9.0")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
-                implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:2.1.0-alpha-02")
             }
         }
         val iosX64Main by getting

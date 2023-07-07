@@ -11,6 +11,8 @@ kotlin {
             dependencies {
                 implementation(project(":shared:presentation"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+                implementation("androidx.compose.ui:ui-viewbinding:1.4.3")
+                implementation ("androidx.fragment:fragment-ktx:1.6.0")
             }
         }
     }
@@ -32,6 +34,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        viewBinding = true
     }
     kotlin {
         jvmToolchain(11)
