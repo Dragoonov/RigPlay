@@ -1,4 +1,4 @@
-package com.moonlightbutterfly.rigplay
+package com.moonlightbutterfly.rigplay.gamelist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,12 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.arkivanov.essenty.lifecycle.asEssentyLifecycle
-import com.moonlightbutterfly.rigplay.home.*
-import com.moonlightbutterfly.rigplay.home.GameListController
-import com.moonlightbutterfly.rigplay.home.GameListControllerFactory
+import com.moonlightbutterfly.rigplay.gamelist.controller.GameListController
+import com.moonlightbutterfly.rigplay.gamelist.controller.GameListControllerFactory
+import com.moonlightbutterfly.rigplay.gamelist.stateholder.GameListStateHolder
+import com.moonlightbutterfly.rigplay.gamelist.stateholder.GameListStateHolderFactory
+import com.moonlightbutterfly.rigplay.gamelist.view.GameListViewFactory
+import com.moonlightbutterfly.rigplay.gamelist.view.MainLayout
 import org.koin.android.ext.android.inject
 
 class GameListFragment : Fragment() {

@@ -1,6 +1,6 @@
-package com.moonlightbutterfly.rigplay
+package com.moonlightbutterfly.rigplay.gamelist.stateholder
 
-import com.moonlightbutterfly.rigplay.home.GameListItem
+import com.moonlightbutterfly.rigplay.gamelist.model.GameListItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

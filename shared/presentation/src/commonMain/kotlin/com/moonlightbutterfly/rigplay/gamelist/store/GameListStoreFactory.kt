@@ -1,10 +1,11 @@
-package com.moonlightbutterfly.rigplay.home
+package com.moonlightbutterfly.rigplay.gamelist.store
 
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.moonlightbutterfly.rigplay.gamelist.model.GameListItem
 import com.moonlightbutterfly.rigplay.repository.GamesRepository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,7 +28,12 @@ internal class GameListStoreFactory(
                 onAction<Unit> {
                     launch {
                         val games = withContext(ioContext) { gamesDataSource.getGames() }
-                        dispatch(Msg.Loaded(GameListStore.State.Data.Games(games.map { GameListItem(title = it.title, imageUrl = it.imageUrl) })))
+                        dispatch(Msg.Loaded(GameListStore.State.Data.Games(games.map {
+                            GameListItem(
+                                title = it.title,
+                                imageUrl = it.imageUrl
+                            )
+                        })))
                     }
                 }
 
@@ -35,7 +41,12 @@ internal class GameListStoreFactory(
                     dispatch(Msg.Loading)
                     launch {
                         val games = withContext(ioContext) { gamesDataSource.getGames() }
-                        dispatch(Msg.Loaded(GameListStore.State.Data.Games(games.map { GameListItem(title = it.title, imageUrl = it.imageUrl) })))
+                        dispatch(Msg.Loaded(GameListStore.State.Data.Games(games.map {
+                            GameListItem(
+                                title = it.title,
+                                imageUrl = it.imageUrl
+                            )
+                        })))
                     }
                 }
             },

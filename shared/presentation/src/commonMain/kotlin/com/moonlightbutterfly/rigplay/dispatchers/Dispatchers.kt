@@ -1,4 +1,4 @@
-package com.moonlightbutterfly.rigplay
+package com.moonlightbutterfly.rigplay.dispatchers
 
 import kotlinx.coroutines.CoroutineDispatcher
 

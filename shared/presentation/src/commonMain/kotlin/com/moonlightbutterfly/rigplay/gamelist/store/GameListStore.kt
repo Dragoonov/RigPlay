@@ -1,6 +1,7 @@
-package com.moonlightbutterfly.rigplay.home
+package com.moonlightbutterfly.rigplay.gamelist.store
 
 import com.arkivanov.mvikotlin.core.store.Store
+import com.moonlightbutterfly.rigplay.gamelist.model.GameListItem
 
 internal interface GameListStore: Store<GameListStore.Intent, GameListStore.State, Nothing> {
 

@@ -1,4 +1,7 @@
-package com.moonlightbutterfly.rigplay.home
+package com.moonlightbutterfly.rigplay.gamelist
+
+import com.moonlightbutterfly.rigplay.gamelist.store.GameListStore
+import com.moonlightbutterfly.rigplay.gamelist.view.GameListView
 
 internal val stateToModel: (GameListStore.State) -> GameListView.Model =
     { state ->

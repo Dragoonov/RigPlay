@@ -1,6 +1,7 @@
-package com.moonlightbutterfly.rigplay.home
+package com.moonlightbutterfly.rigplay.gamelist.view
 
 import com.arkivanov.mvikotlin.core.view.MviView
+import com.moonlightbutterfly.rigplay.gamelist.model.GameListItem
 
 interface GameListView: MviView<GameListView.Model, GameListView.Event> {
 

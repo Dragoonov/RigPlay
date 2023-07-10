@@ -1,6 +1,5 @@
-package com.moonlightbutterfly.rigplay.home
+package com.moonlightbutterfly.rigplay.dispatchers
 
-import com.moonlightbutterfly.rigplay.Dispatchers
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.IO
 

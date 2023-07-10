@@ -1,4 +1,4 @@
-package com.moonlightbutterfly.rigplay
+package com.moonlightbutterfly.rigplay.gamelist.stateholder
 
 import kotlinx.coroutines.CoroutineScope
 

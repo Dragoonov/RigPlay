@@ -1,9 +1,9 @@
-package com.moonlightbutterfly.rigplay
+package com.moonlightbutterfly.rigplay.gamelist.view
 
 import com.arkivanov.mvikotlin.core.utils.diff
 import com.arkivanov.mvikotlin.core.view.BaseMviView
 import com.arkivanov.mvikotlin.core.view.ViewRenderer
-import com.moonlightbutterfly.rigplay.home.GameListView
+import com.moonlightbutterfly.rigplay.gamelist.stateholder.GameListStateHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

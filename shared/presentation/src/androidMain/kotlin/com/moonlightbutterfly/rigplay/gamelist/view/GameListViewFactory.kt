@@ -1,6 +1,6 @@
-package com.moonlightbutterfly.rigplay
+package com.moonlightbutterfly.rigplay.gamelist.view
 
-import com.moonlightbutterfly.rigplay.home.GameListView
+import com.moonlightbutterfly.rigplay.gamelist.stateholder.GameListStateHolder
 import kotlinx.coroutines.CoroutineScope
 
 class GameListViewFactory {
