@@ -10,27 +10,24 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.arkivanov.essenty.lifecycle.asEssentyLifecycle
-import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.moonlightbutterfly.rigplay.data.repository.GamesDataSourceImpl
-import com.moonlightbutterfly.rigplay.home.DispatchersImpl
+import com.moonlightbutterfly.rigplay.home.*
 import com.moonlightbutterfly.rigplay.home.GameListController
-import com.moonlightbutterfly.rigplay.home.MainLayout
-import com.moonlightbutterfly.rigplay.repository.GamesRepository
+import com.moonlightbutterfly.rigplay.home.GameListControllerFactory
+import org.koin.android.ext.android.inject
 
 class GameListFragment : Fragment() {
 
     private lateinit var controller: GameListController
-    private val stateHolder = GameListStateHolder(lifecycleScope)
+    private lateinit var stateHolder: GameListStateHolder
+
+    private val stateHolderFactory: GameListStateHolderFactory by inject()
+    private val gameListControllerFactory: GameListControllerFactory by inject()
+    private val gameListViewFactory: GameListViewFactory by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        controller = GameListController(
-            DefaultStoreFactory(),
-            lifecycle.asEssentyLifecycle(),
-            GamesRepository(GamesDataSourceImpl()),
-            DispatchersImpl()
-        )
+        controller = gameListControllerFactory.create(lifecycle.asEssentyLifecycle())
+        stateHolder = stateHolderFactory.create(lifecycleScope)
     }
 
     override fun onCreateView(
@@ -49,6 +46,7 @@ class GameListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        controller.onViewCreated(GameListViewImpl(stateHolder, lifecycleScope), lifecycle.asEssentyLifecycle())
+        val gameListView = gameListViewFactory.create(stateHolder, lifecycleScope)
+        controller.onViewCreated(gameListView, lifecycle.asEssentyLifecycle())
     }
 }

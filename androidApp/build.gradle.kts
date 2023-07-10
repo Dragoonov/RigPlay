@@ -10,9 +10,13 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(project(":shared:presentation"))
+                implementation(project(":shared:data"))
+                implementation(project(":shared:domain"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
                 implementation("androidx.compose.ui:ui-viewbinding:1.4.3")
                 implementation ("androidx.fragment:fragment-ktx:1.6.0")
+                implementation("io.insert-koin:koin-core:3.4.2")
+                implementation("io.insert-koin:koin-android:3.4.2")
             }
         }
     }

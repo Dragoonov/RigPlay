@@ -57,6 +57,7 @@ kotlin {
                 implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.2.1")
                 implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.2.1")
                 implementation("com.arkivanov.essenty:lifecycle:1.1.0")
+                implementation("io.insert-koin:koin-core:3.4.2")
             }
         }
         val androidMain by getting {
@@ -66,6 +67,7 @@ kotlin {
                 api("androidx.core:core-ktx:1.9.0")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation("io.insert-koin:koin-android:3.4.2")
             }
         }
         val iosX64Main by getting
