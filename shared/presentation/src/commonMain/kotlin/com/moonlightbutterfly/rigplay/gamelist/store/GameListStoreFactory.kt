@@ -4,9 +4,12 @@ import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
+import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutorScope
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.moonlightbutterfly.rigplay.gamelist.model.GameListItem
-import com.moonlightbutterfly.rigplay.repository.GamesRepository
+import com.moonlightbutterfly.rigplay.usecase.GetGamesUseCase
+import io.ktor.http.*
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
@@ -14,39 +17,48 @@ import kotlin.coroutines.CoroutineContext
 @OptIn(ExperimentalMviKotlinApi::class)
 internal class GameListStoreFactory(
     private val storeFactory: StoreFactory,
-    private val gamesDataSource: GamesRepository,
+    private val getGamesUseCase: GetGamesUseCase,
     private val mainContext: CoroutineContext,
     private val ioContext: CoroutineContext,
 ) {
+
+    private suspend fun CoroutineExecutorScope<GameListStore.State, Msg, Nothing>.dispatchOnMain(message: Msg) {
+        withContext(mainContext) {
+            dispatch(message)
+        }
+    }
 
     fun create(): GameListStore =
         object : GameListStore, Store<GameListStore.Intent, GameListStore.State, Nothing> by storeFactory.create<GameListStore.Intent, Unit, Msg, GameListStore.State, Nothing>(
             name = "GameListStore",
             initialState = GameListStore.State(),
             bootstrapper = SimpleBootstrapper(Unit),
-            executorFactory = coroutineExecutorFactory(mainContext) {
+            executorFactory = coroutineExecutorFactory(ioContext) {
                 onAction<Unit> {
                     launch {
-                        val games = withContext(ioContext) { gamesDataSource.getGames() }
-                        dispatch(Msg.Loaded(GameListStore.State.Data.Games(games.map {
-                            GameListItem(
-                                title = it.title,
-                                imageUrl = it.imageUrl
-                            )
-                        })))
+                        dispatchOnMain(Msg.Loading)
+                        getGamesUseCase(1)
+                            .collectLatest {
+                            dispatchOnMain(Msg.Loaded(GameListStore.State.Data.Games(it.map { game ->
+                                GameListItem(
+                                    title = game.title,
+                                    imageUrl = game.imageUrl
+                                )
+                            })))
+                        }
                     }
                 }
-
                 onIntent<GameListStore.Intent.Reload> {
-                    dispatch(Msg.Loading)
                     launch {
-                        val games = withContext(ioContext) { gamesDataSource.getGames() }
-                        dispatch(Msg.Loaded(GameListStore.State.Data.Games(games.map {
-                            GameListItem(
-                                title = it.title,
-                                imageUrl = it.imageUrl
-                            )
-                        })))
+                        dispatchOnMain(Msg.Loading)
+                        getGamesUseCase(1).collectLatest {
+                            dispatchOnMain(Msg.Loaded(GameListStore.State.Data.Games(it.map { game ->
+                                GameListItem(
+                                    title = game.title,
+                                    imageUrl = game.imageUrl
+                                )
+                            })))
+                        }
                     }
                 }
             },

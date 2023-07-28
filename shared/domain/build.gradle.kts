@@ -23,9 +23,11 @@ kotlin {
     }
 
     sourceSets {
+        val coroutinesVersion = "1.5.0-native-mt"
         val commonMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-core:3.4.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
             }
         }
         val commonTest by getting {
