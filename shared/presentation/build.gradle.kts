@@ -62,6 +62,9 @@ kotlin {
 
                 implementation("dev.icerock.moko:resources:0.23.0")
                 implementation("dev.icerock.moko:resources-compose:0.23.0")
+
+                implementation("com.arkivanov.decompose:decompose:2.0.1")
+                implementation("com.arkivanov.decompose:extensions-compose-jetpack:2.0.1")
             }
         }
         val androidMain by getting {
