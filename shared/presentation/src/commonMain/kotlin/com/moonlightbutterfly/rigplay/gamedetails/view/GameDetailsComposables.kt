@@ -10,8 +10,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.moonlightbutterfly.rigplay.SharedRes
 import com.moonlightbutterfly.rigplay.gamedetails.model.GameDetailsItem
 import com.moonlightbutterfly.rigplay.gamelist.view.LoadingBar
+import dev.icerock.moko.resources.compose.stringResource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import kotlinx.coroutines.launch
@@ -72,21 +74,21 @@ fun Title(text: String) {
 
 @Composable
 fun SecondaryData(game: GameDetailsItem) {
-    Section(name = "Info") {
+    Section(name = stringResource(SharedRes.strings.info)) {
         Data(
-            title = "Developers",
+            title = stringResource(SharedRes.strings.developers),
             value = game.developers.map { it.name }.toString(),
         )
         Data(
-            title = "Website",
+            title = stringResource(SharedRes.strings.developers),
             value = game.website,
         )
         Data(
-            title = "Platforms",
+            title = stringResource(SharedRes.strings.platforms),
             value = game.platforms.map { it.name }.toString()
         )
         Data(
-            title = "Genres",
+            title = stringResource(SharedRes.strings.genres),
             value = game.genres.map { it.name }.toString()
         )
     }

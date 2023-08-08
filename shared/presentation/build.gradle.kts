@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
     id("kotlin-parcelize")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -58,6 +59,9 @@ kotlin {
                 implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.2.1")
                 implementation("com.arkivanov.essenty:lifecycle:1.1.0")
                 implementation("io.insert-koin:koin-core:3.4.2")
+
+                implementation("dev.icerock.moko:resources:0.23.0")
+                implementation("dev.icerock.moko:resources-compose:0.23.0")
             }
         }
         val androidMain by getting {
@@ -101,4 +105,9 @@ android {
     kotlin {
         jvmToolchain(11)
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.moonlightbutterfly.rigplay"
+    multiplatformResourcesClassName = "SharedRes"
 }

@@ -13,7 +13,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.moonlightbutterfly.rigplay.SharedRes
 import com.moonlightbutterfly.rigplay.gamelist.model.GameListItem
+import dev.icerock.moko.resources.compose.stringResource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import kotlinx.coroutines.launch
@@ -40,7 +42,7 @@ fun MainList(
             }
         }
         Button(onClick = onRefreshClicked, modifier = Modifier.padding(start = 50.dp)) {
-            Text("Refresh")
+            Text(stringResource(SharedRes.strings.refresh))
         }
         if (isLoading) {
             LoadingBar()
