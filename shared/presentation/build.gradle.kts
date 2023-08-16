@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
     id("kotlin-parcelize")
@@ -9,35 +8,7 @@ plugins {
 
 kotlin {
 
-    targets
-        .filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>()
-        .filter { it.konanTarget.family == org.jetbrains.kotlin.konan.target.Family.IOS }
-        .forEach { target ->
-            target.binaries {
-                framework {
-                    export("com.arkivanov.decompose:decompose:2.1.0-alpha-02")
-                }
-            }
-        }
-
     android()
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    cocoapods {
-        version = "1.0.0"
-        summary = "Some description for the Presentation Module"
-        homepage = "Link to the Presentation Module homepage"
-        ios.deploymentTarget = "14.1"
-        podfile = project.file("../iosApp/Podfile")
-        framework {
-            baseName = "presentation"
-            isStatic = true
-        }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
-    }
 
     sourceSets {
         val ktorVersion = "2.3.1"
@@ -65,6 +36,7 @@ kotlin {
 
                 implementation("com.arkivanov.decompose:decompose:2.0.1")
                 implementation("com.arkivanov.decompose:extensions-compose-jetpack:2.0.1")
+                implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.0.1")
             }
         }
         val androidMain by getting {
@@ -76,15 +48,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("io.insert-koin:koin-android:3.4.2")
             }
-        }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
         }
     }
 }
