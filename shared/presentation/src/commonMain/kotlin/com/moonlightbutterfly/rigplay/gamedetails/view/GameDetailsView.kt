@@ -1,17 +1,15 @@
 package com.moonlightbutterfly.rigplay.gamedetails.view
 
-import com.arkivanov.mvikotlin.core.view.MviView
+import com.arkivanov.decompose.value.Value
 import com.moonlightbutterfly.rigplay.gamedetails.model.GameDetailsItem
 
-interface GameDetailsView: MviView<GameDetailsView.Model, GameDetailsView.Event> {
+interface GameDetailsView {
+
+    val models: Value<Model>
 
     data class Model(
         val isLoading: Boolean,
         val isError: Boolean,
         val gameDetails: GameDetailsItem
     )
-
-    sealed class Event {
-        //Nothing
-    }
 }

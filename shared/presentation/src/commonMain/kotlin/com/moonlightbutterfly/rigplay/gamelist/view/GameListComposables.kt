@@ -1,5 +1,7 @@
 package com.moonlightbutterfly.rigplay.gamelist.view
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,43 +15,35 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.moonlightbutterfly.rigplay.SharedRes
 import com.moonlightbutterfly.rigplay.gamelist.model.GameListItem
 import dev.icerock.moko.resources.compose.stringResource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import kotlinx.coroutines.launch
+
 
 @Composable
-fun MainLayout(
-    onRefreshClicked: () -> Unit,
-    games: List<GameListItem>,
-    isLoading: Boolean
+fun GameListMainView(
+    view: GameListView
 ) {
-    MainList(onRefreshClicked, games, isLoading)
-}
-
-@Composable
-fun MainList(
-    onRefreshClicked: () -> Unit,
-    games: List<GameListItem>,
-    isLoading: Boolean
-) {
+    val games by view.models.subscribeAsState()
     Box {
         LazyColumn {
-            items(games) {
-                ListItem(GameListItem(it.title, it.imageUrl))
+            items(games.games) {
+                ListItem(GameListItem(it.id, it.title, it.imageUrl), view::onGameSelected)
             }
         }
-        Button(onClick = onRefreshClicked, modifier = Modifier.padding(start = 50.dp)) {
+        Button(onClick = view::onRefreshClicked, modifier = Modifier.padding(start = 50.dp)) {
             Text(stringResource(SharedRes.strings.refresh))
         }
-        if (isLoading) {
+        if (games.isLoading) {
             LoadingBar()
         }
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoadingBar() {
     Scaffold(
@@ -69,13 +63,17 @@ fun LoadingBar() {
 }
 
 @Composable
-fun ListItem(item: GameListItem) {
-    val coroutineScope = rememberCoroutineScope()
+fun ListItem(item: GameListItem, onGameClickListener: (id: Int) -> Unit) {
     val snackbarHostState = remember { SnackbarHostState() }
     Row(
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(20.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp)
+            .clickable {
+                onGameClickListener(item.id)
+            }
     ) {
         KamelImage(
             contentScale = ContentScale.Crop,
@@ -84,7 +82,7 @@ fun ListItem(item: GameListItem) {
             contentDescription = "Game",
             onLoading = { progress -> CircularProgressIndicator(progress) },
             onFailure = { exception ->
-                coroutineScope.launch {
+                LaunchedEffect(Unit) {
                     snackbarHostState.showSnackbar(
                         message = exception.message.toString(),
                         duration = SnackbarDuration.Short

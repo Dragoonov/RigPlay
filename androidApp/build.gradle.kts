@@ -17,6 +17,7 @@ kotlin {
                 implementation ("androidx.fragment:fragment-ktx:1.6.0")
                 implementation("io.insert-koin:koin-core:3.4.2")
                 implementation("io.insert-koin:koin-android:3.4.2")
+                implementation("com.arkivanov.decompose:decompose:2.0.1")
             }
         }
     }

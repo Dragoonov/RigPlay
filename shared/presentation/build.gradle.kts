@@ -27,16 +27,18 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
                 implementation("com.arkivanov.mvikotlin:mvikotlin:3.2.1")
                 implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.2.1")
+                implementation("com.arkivanov.mvikotlin:rx:3.2.1")
                 implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.2.1")
+                implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-reaktive:3.2.1")
                 implementation("com.arkivanov.essenty:lifecycle:1.1.0")
                 implementation("io.insert-koin:koin-core:3.4.2")
-
                 implementation("dev.icerock.moko:resources:0.23.0")
                 implementation("dev.icerock.moko:resources-compose:0.23.0")
 
                 implementation("com.arkivanov.decompose:decompose:2.0.1")
-                implementation("com.arkivanov.decompose:extensions-compose-jetpack:2.0.1")
                 implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.0.1")
+                implementation("com.badoo.reaktive:reaktive:1.2.3")
+                implementation("com.badoo.reaktive:coroutines-interop:1.2.3")
             }
         }
         val androidMain by getting {

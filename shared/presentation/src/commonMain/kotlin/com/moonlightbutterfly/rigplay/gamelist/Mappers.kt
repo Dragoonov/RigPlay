@@ -11,10 +11,3 @@ internal val stateToModel: (GameListStore.State) -> GameListView.Model =
             games = (state.data as? GameListStore.State.Data.Games)?.games ?: emptyList()
         )
     }
-
-internal val eventToIntent: (GameListView.Event) -> GameListStore.Intent? =
-    { event ->
-        when (event) {
-            is GameListView.Event.RefreshTriggered -> GameListStore.Intent.Reload
-        }
-    }

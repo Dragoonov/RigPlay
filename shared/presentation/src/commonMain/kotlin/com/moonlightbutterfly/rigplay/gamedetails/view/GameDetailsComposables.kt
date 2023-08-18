@@ -10,28 +10,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.moonlightbutterfly.rigplay.SharedRes
 import com.moonlightbutterfly.rigplay.gamedetails.model.GameDetailsItem
 import com.moonlightbutterfly.rigplay.gamelist.view.LoadingBar
 import dev.icerock.moko.resources.compose.stringResource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import kotlinx.coroutines.launch
 
 @Composable
-fun MainLayout(
-    game: GameDetailsItem,
-    isLoading: Boolean
+fun GameDetailsMainView(
+    view: GameDetailsView
 ) {
-    MainDetails(game, isLoading)
-}
-
-@Composable
-fun MainDetails(
-    game: GameDetailsItem,
-    isLoading: Boolean
-) {
-    val coroutineScope = rememberCoroutineScope()
+    val game by view.models.subscribeAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     Box {
         LazyColumn {
@@ -39,11 +30,11 @@ fun MainDetails(
                 KamelImage(
                     contentScale = ContentScale.Fit,
                     modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
-                    resource = asyncPainterResource(data = game.imageUrl),
+                    resource = asyncPainterResource(data = game.gameDetails.imageUrl),
                     contentDescription = "Game",
                     onLoading = { progress -> CircularProgressIndicator(progress) },
                     onFailure = { exception ->
-                        coroutineScope.launch {
+                        LaunchedEffect(Unit) {
                             snackbarHostState.showSnackbar(
                                 message = exception.message.toString(),
                                 duration = SnackbarDuration.Short
@@ -51,12 +42,12 @@ fun MainDetails(
                         }
                     }
                 )
-                Title(game.title)
-                Text(game.description, modifier = Modifier.padding(8.dp), maxLines = 10, overflow = TextOverflow.Ellipsis)
-                SecondaryData(game)
+                Title(game.gameDetails.title)
+                Text(game.gameDetails.description, modifier = Modifier.padding(8.dp), maxLines = 10, overflow = TextOverflow.Ellipsis)
+                SecondaryData(game.gameDetails)
             }
         }
-        if (isLoading) {
+        if (game.isLoading) {
             LoadingBar()
         }
     }

@@ -1,21 +1,21 @@
 package com.moonlightbutterfly.rigplay
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
-import com.moonlightbutterfly.rigplay.databinding.ActivityMainBinding
-import com.moonlightbutterfly.rigplay.gamelist.GameListFragment
+import com.arkivanov.decompose.defaultComponentContext
+import com.moonlightbutterfly.rigplay.root.RootContent
+import com.moonlightbutterfly.rigplay.root.RootFactory
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
+
+    private val rootFactory: RootFactory by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        supportFragmentManager.commit {
-            replace(binding.navHostFragment.id, GameListFragment())
-            setReorderingAllowed(true)
-            addToBackStack(null)
+        setContent {
+            RootContent(rootFactory.create(defaultComponentContext()))
         }
-        setContentView(binding.root)
     }
 }

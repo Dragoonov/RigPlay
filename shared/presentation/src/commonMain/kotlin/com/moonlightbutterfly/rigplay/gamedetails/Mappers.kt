@@ -12,9 +12,3 @@ internal val stateToModel: (GameDetailsStore.State) -> GameDetailsView.Model =
             gameDetails = (state.data as? GameDetailsStore.State.Data.GameDetails)?.details ?: GameDetailsItem.empty()
         )
     }
-
-internal val eventToIntent: (GameDetailsView.Event) -> GameDetailsStore.Intent? =
-    { event ->
-        // Empty for now
-        throw IllegalStateException("Not initialized")
-    }

@@ -41,6 +41,7 @@ internal class GameListStoreFactory(
                             .collectLatest {
                             dispatchOnMain(Msg.Loaded(GameListStore.State.Data.Games(it.map { game ->
                                 GameListItem(
+                                    id = game.id,
                                     title = game.title,
                                     imageUrl = game.imageUrl
                                 )
@@ -54,6 +55,7 @@ internal class GameListStoreFactory(
                         getGamesUseCase(1).collectLatest {
                             dispatchOnMain(Msg.Loaded(GameListStore.State.Data.Games(it.map { game ->
                                 GameListItem(
+                                    id = game.id,
                                     title = game.title,
                                     imageUrl = game.imageUrl
                                 )
