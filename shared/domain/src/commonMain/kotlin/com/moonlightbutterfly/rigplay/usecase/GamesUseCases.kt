@@ -5,3 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 fun interface GetGamesUseCase : (Int) -> Flow<List<Game>>
 fun interface GetGameDetailsUseCase : (Int) -> Flow<Game>
+fun interface IsGameLikedUseCase: suspend (Int) -> Boolean
+fun interface LikeGameUseCase: suspend (Boolean) -> Boolean

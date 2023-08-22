@@ -6,7 +6,7 @@ import com.moonlightbutterfly.rigplay.gamedetails.model.GameDetailsItem
 internal interface GameDetailsStore: Store<GameDetailsStore.Intent, GameDetailsStore.State, Nothing> {
 
     sealed class Intent {
-        // Nothing
+        data class ChangeLike(val liked: Boolean) : Intent()
     }
 
     data class State(

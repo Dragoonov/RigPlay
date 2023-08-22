@@ -1,8 +1,13 @@
 package com.moonlightbutterfly.rigplay.gamedetails.view
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -40,6 +45,13 @@ fun GameDetailsMainView(
                                 duration = SnackbarDuration.Short
                             )
                         }
+                    }
+                )
+                Image(
+                    imageVector = if (game.gameDetails.isLiked) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = null,
+                    modifier = Modifier.clickable {
+                        view.onGameLikeChanged(game.gameDetails.isLiked.not())
                     }
                 )
                 Title(game.gameDetails.title)

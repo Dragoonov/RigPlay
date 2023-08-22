@@ -7,6 +7,8 @@ interface GameDetailsView {
 
     val models: Value<Model>
 
+    fun onGameLikeChanged(liked: Boolean)
+
     data class Model(
         val isLoading: Boolean,
         val isError: Boolean,

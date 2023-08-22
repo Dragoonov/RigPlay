@@ -15,21 +15,18 @@ val presentationModule = module {
 
     // GameList
     single {
-        val dispatchers: Dispatchers = get()
-        GameListStoreFactory(get(), get(), dispatchers.main, dispatchers.io).create()
+        GameListStoreFactory(get(), get(), get<Dispatchers>().main, get<Dispatchers>().io).create()
     }
 
     // GameDetails
     single {
-        val dispatchers: Dispatchers = get()
-        GameDetailsStoreFactory(get(), get(), dispatchers.main, dispatchers.io)
+        GameDetailsStoreFactory(get(), get(), get(), get(), get<Dispatchers>().main, get<Dispatchers>().io)
     }
 
     // Root
     single<StoreFactory> { DefaultStoreFactory() }
 
     single {
-        val dispatchers: Dispatchers = get()
-        RootFactory(get(), get(), get(), dispatchers.main, dispatchers.io)
+        RootFactory(get(), get(), get(), get(), get(), get<Dispatchers>().main, get<Dispatchers>().io)
     }
 }

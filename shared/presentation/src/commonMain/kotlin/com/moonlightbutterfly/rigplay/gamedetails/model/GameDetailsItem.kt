@@ -11,9 +11,10 @@ data class GameDetailsItem(
     val website: String,
     val developers: List<Developer>,
     val platforms: List<Platform>,
-    val genres: List<Genre>
+    val genres: List<Genre>,
+    val isLiked: Boolean
 ) {
     companion object {
-        fun empty() = GameDetailsItem("", "", "", "", emptyList(), emptyList(), emptyList())
+        fun empty() = GameDetailsItem("", "", "", "", emptyList(), emptyList(), emptyList(), false)
     }
 }

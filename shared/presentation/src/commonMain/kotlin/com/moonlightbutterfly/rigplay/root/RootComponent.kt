@@ -16,6 +16,8 @@ import com.moonlightbutterfly.rigplay.gamelist.component.GameListComponent
 import com.moonlightbutterfly.rigplay.gamelist.view.GameListView
 import com.moonlightbutterfly.rigplay.usecase.GetGameDetailsUseCase
 import com.moonlightbutterfly.rigplay.usecase.GetGamesUseCase
+import com.moonlightbutterfly.rigplay.usecase.IsGameLikedUseCase
+import com.moonlightbutterfly.rigplay.usecase.LikeGameUseCase
 import com.moonlightbutterfly.rigplay.utils.Consumer
 import kotlin.coroutines.CoroutineContext
 
@@ -30,6 +32,8 @@ class RootComponent internal constructor(
         storeFactory: StoreFactory,
         getGamesUseCase: GetGamesUseCase,
         getGameDetailsUseCase: GetGameDetailsUseCase,
+        isGameLikedUseCase: IsGameLikedUseCase,
+        likeGameUseCase: LikeGameUseCase,
         mainContext: CoroutineContext,
         ioContext: CoroutineContext,
     ) : this(
@@ -50,6 +54,8 @@ class RootComponent internal constructor(
                 storeFactory = storeFactory,
                 itemId = itemId,
                 getGameDetailsUseCase = getGameDetailsUseCase,
+                isGameLikedUseCase = isGameLikedUseCase,
+                likeGameUseCase = likeGameUseCase,
                 mainContext = mainContext,
                 ioContext = ioContext,
             )
