@@ -51,7 +51,7 @@ fun GameDetailsMainView(
                     imageVector = if (game.gameDetails.isLiked) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
                     contentDescription = null,
                     modifier = Modifier.clickable {
-                        view.onGameLikeChanged(game.gameDetails.isLiked.not())
+                        view.onGameLikeChanged(game.gameDetails.id, game.gameDetails.isLiked.not())
                     }
                 )
                 Title(game.gameDetails.title)

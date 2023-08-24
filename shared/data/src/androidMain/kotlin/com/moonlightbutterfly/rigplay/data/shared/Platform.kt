@@ -1,11 +1,8 @@
-package com.moonlightbutterfly.rigplay.data
+package com.moonlightbutterfly.rigplay.data.shared
 
+import com.moonlightbutterfly.rigplay.data.BuildConfig
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
-import okhttp3.internal.platform.AndroidPlatform
-import java.io.File
-import java.io.FileInputStream
-import java.util.Properties
 import java.util.concurrent.TimeUnit
 
 actual fun httpClient(config: HttpClientConfig<*>.()-> Unit) = HttpClient(OkHttp){

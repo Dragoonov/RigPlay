@@ -50,6 +50,7 @@ internal class GameDetailsStoreFactory(
                                         Msg.Loaded(
                                             GameDetailsStore.State.Data.GameDetails(
                                                 GameDetailsItem(
+                                                    id = it.id,
                                                     title = it.title,
                                                     imageUrl = it.imageUrl,
                                                     description = it.description,
@@ -68,7 +69,7 @@ internal class GameDetailsStoreFactory(
                     onIntent<GameDetailsStore.Intent.ChangeLike> {
                         launch {
                             dispatchOnMain(Msg.Loading)
-                            val result = likeGameUseCase(it.liked)
+                            val result = likeGameUseCase(it.id, it.liked)
                             if (result) {
                                 dispatchOnMain(Msg.LikeChanged(it.liked))
                             } else {

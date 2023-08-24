@@ -5,6 +5,13 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
+    id("com.squareup.sqldelight")
+}
+
+sqldelight {
+    database("RigPlayDatabase") {
+        packageName = "com.moonlightbutterfly.rigplay"
+    }
 }
 
 fun getApiKey(): String {
@@ -47,6 +54,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation("com.squareup.sqldelight:android-driver:1.5.5")
             }
         }
         val androidUnitTest by getting

@@ -40,7 +40,7 @@ class GameDetailsComponent(
 
     override val models: Value<GameDetailsView.Model> = store.asValue().map(stateToModel)
 
-    override fun onGameLikeChanged(liked: Boolean) {
-        store.accept(GameDetailsStore.Intent.ChangeLike(liked))
+    override fun onGameLikeChanged(id: Int, liked: Boolean) {
+        store.accept(GameDetailsStore.Intent.ChangeLike(id, liked))
     }
 }

@@ -10,5 +10,5 @@ class GamesRepository(private val gamesDataSource: GamesDataSource, private val 
 
     suspend fun isGameLiked(id: Int) = userPreferencesDataSource.isGameLiked(id)
 
-    suspend fun changeGameLike(liked: Boolean) = userPreferencesDataSource.changeGameLike(liked)
+    suspend fun changeGameLike(id: Int, liked: Boolean) = userPreferencesDataSource.changeGameLike(id, liked)
 }

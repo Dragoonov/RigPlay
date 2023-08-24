@@ -5,6 +5,7 @@ import com.moonlightbutterfly.rigplay.model.Genre
 import com.moonlightbutterfly.rigplay.model.Platform
 
 data class GameDetailsItem(
+    val id: Int,
     val title: String,
     val imageUrl: String,
     val description: String,
@@ -15,6 +16,6 @@ data class GameDetailsItem(
     val isLiked: Boolean
 ) {
     companion object {
-        fun empty() = GameDetailsItem("", "", "", "", emptyList(), emptyList(), emptyList(), false)
+        fun empty() = GameDetailsItem(0, "", "", "", "", emptyList(), emptyList(), emptyList(), false)
     }
 }

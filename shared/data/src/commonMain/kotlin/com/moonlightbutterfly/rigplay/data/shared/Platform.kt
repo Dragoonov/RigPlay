@@ -1,4 +1,4 @@
-package com.moonlightbutterfly.rigplay.data
+package com.moonlightbutterfly.rigplay.data.shared
 
 import io.ktor.client.*
 

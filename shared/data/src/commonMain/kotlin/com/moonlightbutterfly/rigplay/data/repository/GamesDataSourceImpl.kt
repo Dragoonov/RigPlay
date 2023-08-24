@@ -1,6 +1,6 @@
 package com.moonlightbutterfly.rigplay.data.repository
 
-import com.moonlightbutterfly.rigplay.data.apiKey
+import com.moonlightbutterfly.rigplay.data.shared.apiKey
 import com.moonlightbutterfly.rigplay.data.dto.GameDetailedDTO
 import com.moonlightbutterfly.rigplay.data.dto.GamesDTO
 import com.moonlightbutterfly.rigplay.data.dto.toGame
